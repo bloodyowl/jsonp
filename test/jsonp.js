@@ -1,7 +1,6 @@
 var tape = require("tape")
   , jsonp = require("../")
 
-
 tape("jsonp._resolveUrl", function(test){
 
   test.equal(jsonp._resolveUrl("foo", "bar=baz"), "foo?bar=baz")
