@@ -23,3 +23,4 @@ Creates a new jsonp object.
 ### `request.load() -> promise`
 
 Creates a promise bound to the script loading. 
+The promise gets the passed `object` as value, or an error if the loading failed. 
