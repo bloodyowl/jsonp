@@ -42,7 +42,7 @@ tape("jsonp failure", function(test){
     .then(function(){
       test.fail("shouln't execute successCallback")
     }, function(err){
-      test.pass("should execute successCallback")
+      test.pass("should execute rejectCallback")
       test.ok(Error.prototype.isPrototypeOf(err), "gets error")
     })
 
