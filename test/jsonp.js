@@ -35,7 +35,7 @@ tape("jsonp", function(test){
 tape("jsonp failure", function(test){
 
   test.plan(2)
-  var fetcher = jsonp.create("foo/bar")
+  var fetcher = jsonp.create("http://api.openweathermap.org/data/2.5/foo?q=London,uk")
 
   fetcher
     .load()
