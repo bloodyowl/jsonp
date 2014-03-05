@@ -1,14 +1,17 @@
 {
-  "name" : "bloody-jsonp",
-  "version" : "0.1.0",
-  "repository" : "https://github.com/bloodyowl/jsonp",
-  "issues" : "https://github.com/bloodyowl/jsonp/issues",
+  "name": "bloody-jsonp",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bloodyowl/jsonp"
+  },
+  "issues": "https://github.com/bloodyowl/jsonp/issues",
   "dependencies": {
     "bloody-class": "~1.1.0",
     "bloody-promise": "~0.2.1"
   },
-  "scripts" : {
-    "test" : "tape test/*.js"
+  "scripts": {
+    "test": "tape test/*.js"
   },
   "testling": {
     "files": "test/*.js",
@@ -50,5 +53,16 @@
   },
   "devDependencies": {
     "tape": "~2.3.2"
-  }
+  },
+  "description": "[![browser support](https://ci.testling.com/bloodyowl/jsonp.png)](https://ci.testling.com/bloodyowl/jsonp)",
+  "bugs": {
+    "url": "https://github.com/bloodyowl/jsonp/issues"
+  },
+  "homepage": "https://github.com/bloodyowl/jsonp",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "author": "bloodyowl",
+  "license": "MIT"
 }
