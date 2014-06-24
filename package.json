@@ -1,6 +1,7 @@
 {
   "name": "bloody-jsonp",
   "version": "1.0.0",
+  "description" : "jsonp (with promises)",
   "repository": {
     "type": "git",
     "url": "https://github.com/bloodyowl/jsonp"
@@ -50,7 +51,6 @@
   "devDependencies": {
     "tape": "~2.3.2"
   },
-  "description": "[![browser support](https://ci.testling.com/bloodyowl/jsonp.png)](https://ci.testling.com/bloodyowl/jsonp)",
   "bugs": {
     "url": "https://github.com/bloodyowl/jsonp/issues"
   },
