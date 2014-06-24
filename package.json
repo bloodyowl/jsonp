@@ -1,15 +1,11 @@
 {
   "name": "bloody-jsonp",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/bloodyowl/jsonp"
   },
   "issues": "https://github.com/bloodyowl/jsonp/issues",
-  "dependencies": {
-    "bloody-class": "~1.1.0",
-    "bloody-promise": "~0.2.1"
-  },
   "scripts": {
     "test": "tape test/*.js"
   },
@@ -17,9 +13,9 @@
     "files": "test/*.js",
     "browsers": {
       "ie": [
-        7,
         8,
-        9
+        9,
+        10
       ],
       "firefox": [
         22,
@@ -64,5 +60,9 @@
     "test": "test"
   },
   "author": "bloodyowl",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bloody-class": "^1.3.1",
+    "bloody-promise": "^1.0.0"
+  }
 }

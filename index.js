@@ -1,72 +1,76 @@
 var klass = require("bloody-class")
-  , promise = require("bloody-promise")
-  , uniq = -1
+var promise = require("bloody-promise")
+var unique = -1
+var configurable = {
+  url : 1,
+  timeout : 1,
+  param : 1
+}
+var parent =
+  document.head ||
+  document.getElementsByTagName("head")[0] ||
+  document.documentElement
+
+function resolveURL(url, queryString){
+  var index
+  if(queryString == null) {
+    return url
+  }
+  index = url.indexOf("?")
+  if(index == -1) {
+      return url + "?" + queryString
+  }
+  if(index == url.length - 1) {
+    return url + queryString
+  }
+  return url + "&" + queryString
+}
 
 module.exports = klass.extend({
-  timeout : 10 * 1000,
-  _callbackName : "bloodyjsonp",
-  constructor : function(url){
-    this.url = url
-  },
-  _createCallback : function(name, p, timeout, removeScript){
-    var self = this
-    return self.callback = function(object){
-      if(timeout) clearTimeout(timeout)
-      p.fulfill(object)
-      window[name] = null
-      removeScript()
+  constructor : function(options){
+    var key
+    if(typeof options == "string") {
+      options = {
+        url : options
+      }
     }
-  },
-  _resolveUrl : function(baseUrl, queryString){
-    switch(baseUrl.indexOf("?")) {
-      case -1:
-      return baseUrl + "?" + queryString
-      break
-      case baseUrl.length - 1:
-      return baseUrl + queryString
-      break
-      default:
-      return baseUrl + "&" + queryString
-    }
-  },
-  _initTimeout : function(name, p, removeScript){
-    return setTimeout(function(){
-      p.reject(new Error("script timeout"))
-      window[name] = null
-      removeScript()
-    }, this.timeout)
-  },
-  _createErrorCallback : function(name, p, timeout, removeScript){
-    return function(){
-      if(timeout) clearTimeout(timeout)
-      p.reject(new Error("script errored"))
-      window[name] = null
-      removeScript()
-    }
-  },
-  _removeScript : function(script){
-    return function(){
-      if(script.parentNode) {
-        script.parentNode.removeChild(script)
+    for(key in options) {
+      if(options.hasOwnProperty(key) && configurable[key]) {
+        this[key] = options[key]
       }
     }
   },
+  url : null,
+  timeout : 10000,
+  param : "callback",
   load : function(){
-    var self = this
-    return promise.create(function(p){
-      var script = document.createElement("script")
-        , parent =
-            document.head ||
-            document.getElementsByTagName("head")[0] ||
-            document.documentElement
-        , name = self._callbackName + (++uniq)
-        , removeScript = self._removeScript(script)
-        , timeout = self._initTimeout(name, p, removeScript)
-      script.type = "text/javascript"
-      window[name] = self._createCallback(name, p, timeout, removeScript)
-      script.onerror = self._createErrorCallback(name, p, timeout, removeScript)
-      script.src = self._resolveUrl(self.url, "callback=" + name)
+    var script = document.createElement("script")
+    var jsonp = this
+    var timeout
+    var then = promise.create(function(resolve, reject){
+      var cbName = "bloodyjsonp" + (++unique)
+      script.onerror = function(){
+        reject(new Error("script errored"))
+      }
+      script.src = resolveURL(jsonp.url, jsonp.param + "=" + cbName)
+      window[cbName] = function(object){
+        window[cbName] = null
+        resolve(object)
+      }
       parent.appendChild(script)
+      timeout = setTimeout(function(){
+        timeout = null
+        reject(new Error("timeout"))
+      }, jsonp.timeout)
     })
+    then.done(function(){
+      if(timeout) {
+        clearTimeout(timeout)
+      }
+      if(script.parentNode) {
+        script.parentNode.removeChild(script)
+      }
+    })
+    return then
   }
 })
