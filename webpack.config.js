@@ -40,7 +40,9 @@ const config = {
         loaders : [
           // the `playground` option is used for ES7 class property
           // initializers
-          "babel?stage=0",
+          "babel?" + JSON.stringify({
+            stage: 0,
+          }),
         ],
         exclude : /node_modules/,
       },

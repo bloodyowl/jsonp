@@ -1,4 +1,4 @@
-import tape from "tape"
+import tape from "tape-catch"
 import jsonp from ".."
 
 tape("jsonp", (test) => {

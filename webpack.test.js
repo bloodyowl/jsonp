@@ -1,4 +1,6 @@
-import assign from "object-assign"
+import "es5-shim"
+import "es5-shim/es5-sham"
+import "babel/polyfill"
 
 if(typeof Object.assign !== "function") {
   Object.assign = assign

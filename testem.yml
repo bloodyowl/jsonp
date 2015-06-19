@@ -4,7 +4,7 @@ src_files: src/**/*
 serve_files: dist/test.js
 
 launch_in_dev:
-  - firefox
+  - phantomjs
 
 launch_in_ci:
-  - firefox
+  - phantomjs
