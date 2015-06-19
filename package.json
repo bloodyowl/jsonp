@@ -1,68 +1,42 @@
 {
   "name": "bloody-jsonp",
-  "version": "1.0.0",
-  "description" : "jsonp (with promises)",
+  "version": "2.0.0",
+  "description": "jsonp (with promises)",
   "repository": {
     "type": "git",
     "url": "https://github.com/bloodyowl/jsonp"
   },
   "issues": "https://github.com/bloodyowl/jsonp/issues",
   "scripts": {
-    "test": "tape test/*.js"
-  },
-  "testling": {
-    "files": "test/*.js",
-    "browsers": {
-      "ie": [
-        8,
-        9,
-        10
-      ],
-      "firefox": [
-        22,
-        23,
-        24,
-        25
-      ],
-      "chrome": [
-        28,
-        29,
-        30,
-        31
-      ],
-      "safari": [
-        4,
-        5.1,
-        6
-      ],
-      "opera": [
-        10,
-        11,
-        12
-      ],
-      "iphone": [
-        6
-      ],
-      "ipad": [
-        6
-      ]
-    }
+    "prestart": "babel-node --stage 0 ./scripts/clean",
+    "start": "babel-node --stage 0 ./scripts/build",
+    "localtest": "npm start && testem",
+    "test": "npm start && testem ci",
+    "bump": "npm start && npm publish"
   },
   "devDependencies": {
-    "tape": "~2.3.2"
+    "babel": "^5.5.8",
+    "babel-core": "^5.5.8",
+    "babel-loader": "^5.1.4",
+    "es5-shim": "^4.1.6",
+    "node-libs-browser": "^0.5.2",
+    "object-assign": "^3.0.0",
+    "rimraf": "^2.4.0",
+    "tape-catch": "^1.0.4",
+    "testem": "^0.8.3",
+    "webpack": "^1.9.11",
+    "zuul": "^3.0.0"
   },
   "bugs": {
     "url": "https://github.com/bloodyowl/jsonp/issues"
   },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "dist/index.js"
+  ],
   "homepage": "https://github.com/bloodyowl/jsonp",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "author": "bloodyowl",
-  "license": "MIT",
-  "dependencies": {
-    "bloody-class": "^1.3.1",
-    "bloody-promise": "^1.0.0"
-  }
+  "license": "MIT"
 }
