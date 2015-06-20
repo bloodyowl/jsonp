@@ -1,6 +1,6 @@
 {
   "name": "bloody-jsonp",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "jsonp (with promises)",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
     "dist/index.js"
   ],
   "homepage": "https://github.com/bloodyowl/jsonp",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "bloodyowl",
   "license": "MIT"
 }
