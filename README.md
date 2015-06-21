@@ -1,5 +1,7 @@
 # jsonp
 
+[![Build Status](https://travis-ci.org/bloodyowl/jsonp.svg?branch=master)](https://travis-ci.org/bloodyowl/jsonp)
+
 ## Install
 
 ```
